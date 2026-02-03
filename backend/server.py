@@ -105,7 +105,7 @@ async def geocode_location(city_state: str) -> tuple[Optional[float], Optional[f
 async def fetch_sheet_data() -> List[Location]:
     """Fetch and parse data from Google Sheets"""
     try:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(SHEETS_URL, timeout=30.0)
             response.raise_for_status()
             
