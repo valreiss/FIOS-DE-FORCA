@@ -163,6 +163,9 @@ async def fetch_sheet_data() -> List[Location]:
                     logger.error(f"Error processing row: {str(e)}")
                     continue
             
+            # Spread out markers with same coordinates
+            locations = spread_overlapping_markers(locations)
+            
             logger.info(f"Successfully processed {len(locations)} locations")
             return locations
             
