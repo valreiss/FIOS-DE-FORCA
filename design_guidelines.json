@@ -1,0 +1,150 @@
+{
+  "identity": {
+    "persona": "E1",
+    "mission": "Create a digital sanctuary for the 'MOVIMENTO FIOS DE FORÇA' that feels like a warm embrace, not a cold tool. The map should feel like a tapestry of connections.",
+    "principles": [
+      "Fusion: Digital Map x Handwoven Tapestry",
+      "Emotion: Warmth, Belonging, Earthiness",
+      "Content: The stories of the women are the threads; the map is the loom.",
+      "Tactility: Use texture and depth to break the digital flatness."
+    ]
+  },
+  "theme": {
+    "mode": "light",
+    "vibe": "Organic, Earthy, Sustainable, Community-Driven",
+    "emotional_archetype": "ORGANIC & EARTHY"
+  },
+  "colors": {
+    "primary": {
+      "DEFAULT": "#6A3512",
+      "foreground": "#FFFFFF",
+      "hover": "#8B4513",
+      "active": "#50280E"
+    },
+    "secondary": {
+      "DEFAULT": "#DAA520",
+      "foreground": "#2A1805",
+      "hover": "#CD853F",
+      "active": "#B8860B"
+    },
+    "background": {
+      "DEFAULT": "#F9F5F0",
+      "paper": "#FFFFFF",
+      "subtle": "#F0EBE5"
+    },
+    "text": {
+      "primary": "#3E2723",
+      "secondary": "#5D4037",
+      "muted": "#8D6E63"
+    },
+    "accent": {
+      "green": "#556B2F",
+      "sage": "#8FBC8F",
+      "terracotta": "#A0522D"
+    },
+    "border": "#E6DCCF"
+  },
+  "typography": {
+    "headings": {
+      "family": "Playfair Display, serif",
+      "weights": ["600", "700"],
+      "usage": "Main titles, hero text, modal headers. Use for 'MOVIMENTO FIOS DE FORÇA'."
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weights": ["400", "500", "600"],
+      "usage": "UI elements, map popups, list items, buttons."
+    },
+    "mono": {
+      "family": "JetBrains Mono, monospace",
+      "usage": "Coordinates, technical data (if any)."
+    }
+  },
+  "layout": {
+    "structure": "Map-First Hybrid",
+    "grid_system": "Tailwind Grid",
+    "spacing": "Generous (2x standard)",
+    "z_index": {
+      "map": 0,
+      "controls": 10,
+      "overlays": 20,
+      "modals": 50
+    }
+  },
+  "components": {
+    "map": {
+      "provider": "OpenStreetMap",
+      "library": "react-leaflet",
+      "style": "Custom muted tiles or CartoDB Voyager to let markers pop.",
+      "marker": {
+        "type": "Custom SVG",
+        "shape": "Pin with organic curve or thread motif",
+        "color": "Primary (#6A3512) for pin, Secondary (#DAA520) for inner detail"
+      },
+      "popup": {
+        "style": "Card-like, rounded-lg, shadow-xl",
+        "background": "white with subtle paper texture",
+        "typography": "Serif for name, Sans for details"
+      }
+    },
+    "ui_elements": {
+      "buttons": "Pill-shaped or soft-rounded (rounded-xl). Primary: Solid Earthy Brown. Secondary: Outline Gold.",
+      "cards": "White bg, soft shadow (shadow-lg), border-l-4 border-primary (thread metaphor).",
+      "inputs": "Warm beige bg (#F5F5F0), border-transparent focus:border-primary.",
+      "modals": "Backdrop blur-sm, warm white content area."
+    },
+    "header": {
+      "style": "Floating glass or solid warm strip",
+      "content": "Logo left, Search/Filter center/right",
+      "height": "h-16 or h-20"
+    }
+  },
+  "assets": {
+    "logo": "https://customer-assets.emergentagent.com/job_geobrecho-finder/artifacts/isyuk4cg_logo%20MULHERES%20QUE%20TECEM%20O%20FUTURO%20SUSTENT%C3%81VEL%20%281%29.png",
+    "textures": [
+      {
+        "url": "https://images.unsplash.com/photo-1642761733235-b3f7f56f251c?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "usage": "Subtle background pattern for sidebars or cards (low opacity overlay)",
+        "alt": "Brown fabric texture"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1758264629814-44559c99e506?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "usage": "Hero section background or accent",
+        "alt": "Ripped denim texture"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1707409066859-a90674383d19?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "usage": "About modal or Welcome screen hero",
+        "alt": "Group of women standing together"
+      }
+    ]
+  },
+  "motion": {
+    "transitions": "transition-all duration-300 ease-out",
+    "hover": "transform -translate-y-1 shadow-lg",
+    "entrance": "animate-in fade-in slide-in-from-bottom-4 duration-700"
+  },
+  "accessibility": {
+    "contrast": "Ensure text is #3E2723 on light backgrounds. Use #FFFFFF text on Primary buttons.",
+    "focus": "Ring color #DAA520 (Gold) for visibility.",
+    "aria": "All map markers must have aria-labels with business names."
+  },
+  "instructions_to_main_agent": [
+    "1. SETUP: Install 'react-leaflet' and 'leaflet'. Ensure Leaflet CSS is imported.",
+    "2. FONTS: Import 'Playfair Display' and 'Manrope' from Google Fonts in index.css.",
+    "3. MAP: Use a map tile layer that is not too noisy. 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' is a good choice for this aesthetic.",
+    "4. DATA: Fetch data from the backend (which scrapes the Google Sheet). Handle loading states gracefully with a 'weaving' or 'spinning thread' loader.",
+    "5. POPUP: The popup is the key interaction. Make it beautiful. Show 'Nome do negócio' (or Name if empty), 'Whatsapp' (as a clickable link), and 'Cidade/Estado'.",
+    "6. RESPONSIVE: On mobile, the map is full screen. The list view should be a drawer or a bottom sheet.",
+    "7. TEXTURE: Use the provided fabric textures subtly. Don't overdo it. Maybe just as a border texture or a faint background on the sidebar."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Avoid generic 'AI slop' designs. No default blue buttons.",
+    "Use 2-3x more spacing than typical.",
+    "Every interaction needs micro-animations.",
+    "Use 'sonner' for toasts.",
+    "Prioritize Shadcn UI components but customize them to match the Earthy theme."
+  ]
+}
