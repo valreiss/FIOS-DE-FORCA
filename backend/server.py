@@ -102,6 +102,56 @@ async def geocode_location(city_state: str) -> tuple[Optional[float], Optional[f
         logger.error(f"Geocoding error for {city_state}: {str(e)}")
         return None, None
 
+def spread_overlapping_markers(locations: List[Location]) -> List[Location]:
+    """Spread out markers that have the same or very close coordinates"""
+    import math
+    import random
+    
+    # Group locations by coordinates (rounded to avoid floating point issues)
+    coord_groups = {}
+    for loc in locations:
+        if loc.latitude is not None and loc.longitude is not None:
+            # Round to 4 decimal places (~11 meters precision)
+            key = (round(loc.latitude, 4), round(loc.longitude, 4))
+            if key not in coord_groups:
+                coord_groups[key] = []
+            coord_groups[key].append(loc)
+    
+    # Spread markers in groups with more than one location
+    result = []
+    for coords, group in coord_groups.items():
+        if len(group) == 1:
+            result.extend(group)
+        else:
+            # Spread markers in a circle pattern
+            center_lat, center_lon = coords
+            radius = 0.003  # ~300 meters offset
+            
+            for i, loc in enumerate(group):
+                # Calculate angle for this marker
+                angle = (2 * math.pi * i) / len(group)
+                
+                # Add some randomness to make it look more natural
+                angle += random.uniform(-0.3, 0.3)
+                radius_offset = radius + random.uniform(-0.001, 0.001)
+                
+                # Calculate new position
+                # Note: longitude offset needs to be adjusted by latitude
+                lat_offset = radius_offset * math.cos(angle)
+                lon_offset = radius_offset * math.sin(angle) / math.cos(math.radians(center_lat))
+                
+                loc.latitude = center_lat + lat_offset
+                loc.longitude = center_lon + lon_offset
+                
+                result.append(loc)
+    
+    # Add locations without coordinates
+    for loc in locations:
+        if loc.latitude is None or loc.longitude is None:
+            result.append(loc)
+    
+    return result
+
 async def fetch_sheet_data() -> List[Location]:
     """Fetch and parse data from Google Sheets"""
     try:
