@@ -15,6 +15,7 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchLocations = useCallback(async (forceRefresh = false, showToast = false) => {
     try {
@@ -59,6 +60,10 @@ function App() {
     fetchLocations(true, true);
   };
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   return (
     <div className="App">
       <Toaster 
@@ -74,9 +79,14 @@ function App() {
         onRefresh={handleRefresh} 
         loading={loading}
         lastUpdated={lastUpdated}
+        onSearch={handleSearch}
       />
       <main className="map-container" data-testid="map-container">
-        <Map locations={locations} loading={loading} />
+        <Map 
+          locations={locations} 
+          loading={loading}
+          searchQuery={searchQuery}
+        />
       </main>
     </div>
   );

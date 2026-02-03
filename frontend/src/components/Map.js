@@ -51,7 +51,7 @@ const FitBounds = ({ locations }) => {
   return null;
 };
 
-const Map = ({ locations, loading }) => {
+const Map = ({ locations, loading, searchQuery }) => {
   const [center] = useState([-15.8267, -47.9218]); // Brazil center
   const customIcon = createCustomIcon();
 
@@ -62,7 +62,19 @@ const Map = ({ locations, loading }) => {
     return cleaned;
   };
 
-  const validLocations = locations.filter(loc => loc.latitude && loc.longitude);
+  // Filter locations based on search query
+  const filteredLocations = locations.filter(loc => {
+    if (!searchQuery || searchQuery.trim() === '') return true;
+    
+    const query = searchQuery.toLowerCase();
+    const businessName = (loc.business_name || '').toLowerCase();
+    const name = (loc.name || '').toLowerCase();
+    const cityState = (loc.city_state || '').toLowerCase();
+    
+    return businessName.includes(query) || name.includes(query) || cityState.includes(query);
+  });
+
+  const validLocations = filteredLocations.filter(loc => loc.latitude && loc.longitude);
 
   if (loading) {
     return (
@@ -80,8 +92,12 @@ const Map = ({ locations, loading }) => {
       <div className="flex items-center justify-center h-full bg-[#F9F5F0]">
         <div className="text-center space-y-4 p-8">
           <MapPinned className="w-16 h-16 text-[#8D6E63] mx-auto" />
-          <p className="text-[#3E2723] text-lg font-medium">Nenhuma localização encontrada</p>
-          <p className="text-[#5D4037] text-sm">Aguarde enquanto carregamos os dados da planilha.</p>
+          <p className="text-[#3E2723] text-lg font-medium">
+            {searchQuery ? 'Nenhum resultado encontrado' : 'Nenhuma localização encontrada'}
+          </p>
+          <p className="text-[#5D4037] text-sm">
+            {searchQuery ? 'Tente outra busca' : 'Aguarde enquanto carregamos os dados da planilha.'}
+          </p>
         </div>
       </div>
     );
@@ -122,14 +138,6 @@ const Map = ({ locations, loading }) => {
                 )}
               </div>
               
-              {location.activity && (
-                <div className="flex items-start gap-2 text-sm text-[#5D4037]">
-                  <span className="text-xs px-2 py-1 bg-[#F0EBE5] rounded-full text-[#6A3512]">
-                    {location.activity}
-                  </span>
-                </div>
-              )}
-              
               <div className="flex items-start gap-2 text-sm text-[#5D4037]">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#8D6E63]" />
                 <span>{location.city_state}</span>
@@ -146,12 +154,6 @@ const Map = ({ locations, loading }) => {
                   <Phone className="w-4 h-4" />
                   <span>{location.whatsapp}</span>
                 </a>
-              )}
-              
-              {location.story && location.story.length > 0 && (
-                <div className="pt-2 border-t border-[#E6DCCF]">
-                  <p className="text-xs text-[#5D4037] line-clamp-3">{location.story}</p>
-                </div>
               )}
             </div>
           </Popup>
