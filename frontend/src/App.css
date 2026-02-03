@@ -11,7 +11,7 @@
 
 @media (max-width: 768px) {
   .map-container {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 120px);
   }
 }
 
