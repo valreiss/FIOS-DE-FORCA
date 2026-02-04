@@ -80,6 +80,7 @@ function App() {
         loading={loading}
         lastUpdated={lastUpdated}
         onSearch={handleSearch}
+        locations={locations}
       />
       <main className="map-container" data-testid="map-container">
         <Map 
