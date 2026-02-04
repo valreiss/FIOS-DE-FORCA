@@ -45,4 +45,7 @@ coverage/
 .cache/
 *.pid
 *.seed
-*.pid.lock
+*.pid.lock-e 
+# Environment files
+*.env
+*.env.*
