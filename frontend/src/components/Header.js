@@ -26,6 +26,8 @@ const Header = ({ onRefresh, loading, lastUpdated, onSearch, locations }) => {
 
   // Group locations by city and count
   const cityStats = useMemo(() => {
+    if (!locations || locations.length === 0) return [];
+    
     const stats = {};
     locations.forEach(loc => {
       if (loc.city_state) {
@@ -43,7 +45,7 @@ const Header = ({ onRefresh, loading, lastUpdated, onSearch, locations }) => {
       .map(([city, data]) => ({ city, ...data }));
   }, [locations]);
 
-  const totalCount = locations.length;
+  const totalCount = locations ? locations.length : 0;
 
   const handleCityClick = (city) => {
     setSearchValue(city);
