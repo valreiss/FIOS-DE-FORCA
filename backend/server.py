@@ -125,7 +125,7 @@ def spread_overlapping_markers(locations: List[Location]) -> List[Location]:
         else:
             # Spread markers in a circle pattern
             center_lat, center_lon = coords
-            radius = 0.003  # ~300 meters offset
+            radius = 0.01  # ~1km offset - increased for better visibility
             
             for i, loc in enumerate(group):
                 # Calculate angle for this marker
@@ -133,7 +133,7 @@ def spread_overlapping_markers(locations: List[Location]) -> List[Location]:
                 
                 # Add some randomness to make it look more natural
                 angle += random.uniform(-0.3, 0.3)
-                radius_offset = radius + random.uniform(-0.001, 0.001)
+                radius_offset = radius + random.uniform(-0.003, 0.003)
                 
                 # Calculate new position
                 # Note: longitude offset needs to be adjusted by latitude
