@@ -73,8 +73,8 @@ mongodb+srv://usuario:SuaSenha123@cluster0.xxxxx.mongodb.net/brechos_db?retryWri
 #### Passo 2: Deploy do Backend
 1. Clique em "Deploy from GitHub repo"
 2. Conecte seu repositório do GitHub
-3. Selecione a pasta `/backend`
-4. Railway vai detectar automaticamente que é Python
+3. Selecione o repositório completo (NÃO selecione apenas /backend)
+4. Railway vai detectar automaticamente que é Python através do nixpacks.toml
 
 #### Passo 3: Configurar Variáveis de Ambiente
 1. Clique em "Variables" na aba do seu projeto
